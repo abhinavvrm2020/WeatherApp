@@ -97,18 +97,11 @@ fun WeatherApp(
                 )
             }
             composable(route = WeatherAppScreen.Result.name) {
+                println("uiState " + uiState.cityName)
                 ResultScreen(
                     cityName = uiState.cityName
                 )
             }
         }
     }
-}
-
-private fun cancelOrderAndNavigateToStart(
-    viewModel: WeatherViewModel,
-    navController: NavHostController
-) {
-    viewModel.resetDetails()
-    navController.popBackStack(WeatherAppScreen.Start.name, inclusive = false)
 }

@@ -11,19 +11,9 @@ class WeatherViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(WeatherUiState("", ""))
     val uiState: StateFlow<WeatherUiState> =_uiState.asStateFlow()
 
-    fun setTemperature(temperatureFromApi: String) {
-        _uiState.update { currentState ->
-            currentState.copy(temperature = temperatureFromApi)
-        }
-    }
-
     fun setCityName(cityNameFromSearchBar: String) {
         _uiState.update { currentState ->
             currentState.copy(cityName = cityNameFromSearchBar)
         }
-    }
-
-    fun resetDetails() {
-        _uiState.value = WeatherUiState(temperature = "", cityName = "")
     }
 }

@@ -28,7 +28,7 @@ fun SearchScreen(
     onCityNameEntered: (String) -> Unit = {},
     onNextButtonClicked: () -> Unit = {}
 ) {
-    val cityName by remember { mutableStateOf("") }
+    var cityName by remember { mutableStateOf("") }
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -46,7 +46,10 @@ fun SearchScreen(
                 ) {
                     TextField(
                         value = cityName,
-                        onValueChange = { onCityNameEntered(cityName) },
+                        onValueChange = { newValue ->
+                            cityName = newValue
+                            onCityNameEntered(newValue)
+                        },
                         label = { Text("City Name") },
                         placeholder = { Text("Type something...") },
                         singleLine = true,
@@ -54,17 +57,17 @@ fun SearchScreen(
                     )
                 }
             }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.Bottom
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.Bottom
+        ) {
+            Button(
+                modifier = Modifier.weight(1f),
+                onClick = onNextButtonClicked
             ) {
-                Button(
-                    modifier = Modifier.weight(1f),
-                    onClick = onNextButtonClicked
-                ) {
-                    Text(stringResource(R.string.search))
-                }
+                Text(stringResource(R.string.search))
             }
         }
     }
